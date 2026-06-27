@@ -1,0 +1,128 @@
+{% extends "layouts/layout.html" %}
+{% set hide_sidebar = false %}
+
+{% block head_append %}
+<link rel="stylesheet" href="/static/lib/APlayer-1.10.1/dist/APlayer.min.css">
+{% endblock %}
+
+{% block main_append %}
+
+
+{% include 'components/carousel.html' %}
+
+<div class="container mt-4 mb-4 text-center">
+    <div id="aplayer"></div>
+</div>
+
+<div class="container mt-4 mb-4 p-3">
+    <h1 class="mb-3 fw-semibold text-center">Welcome to Fast Haylen Channel.</h1>
+    <p class="lead text-center ">
+        Meeting in the vast sea of people is a kind of fate that is destined in the dark.<br>
+        Break through the darkness,<br> And we will meet.<br>
+        We meet,<br>
+For our souls, so sweet and kind,<br>
+Were destined to align.
+    </p>
+    <p class="lead text-center ">
+        We spend our whole lives reminiscing, until we grow old.<br>
+        Those happy moments remain vivid, as if they happened just yesterday.
+    </p>
+    <p class="lead text-center ">
+        The bond between people is often very fleeting — sometimes a single meeting may be the last time we ever see each other. <br>I always cherish those beautiful encounters and memories, hoping to make the beauty last a little longer.
+    </p>    
+</div>
+
+<div class="container mt-4 mb-4 border-top border-dark-subtle">
+    <div class="container mt-3 p-3">
+        <div class="d-flex align-items-center mb-2">
+            <svg class="bi" width="24" height="24" >
+                <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#robot"></use>
+            
+            </svg>
+            <span class="lead ms-2">
+                Have a question? Ask AIbot!
+            </span>            
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <form id="chatForm">
+                    <div class="form-floating mb-1">
+                      <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea3" style="height: 150px"></textarea>
+                      <label for="floatingTextarea3">Question</label>
+                    </div>
+                    <button id="sendBtn" class="btn btn-primary" type="submit">Send</button>
+                </form>
+            </div>
+            <div class="col">
+                <div class="form-floating">
+                    <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea4" style="height: 150px"></textarea>
+                    <label for="floatingTextarea4">Answer</label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container mt-4 mb-4 border-top border-dark-subtle">
+    <!-- <h3 class="mb-3 fw-semibold text-start">Q&A:</h3> -->
+    <div class="container mt-3 mb-0 p-3">
+        <p class="lead text-start">
+            Dear stranger, if you're passing by, would you mind leaving behind a memory?
+        </p>
+    </div>
+    <div class="container col-12 col-md-6 mt-3 mb-3 p-3">
+        <form id="messageForm">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Name" name="name" aria-describedby="nameHelp">
+                <label for="floatingInput">Name</label>
+                <div id="nameHelp" class="form-text">Name must be between 1 and 50 characters long.</div>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput2" placeholder="Title" name="title" aria-describedby="titleHelp">
+                <label for="floatingInput2">Title</label>
+                <div id="titleHelp" class="form-text">Title must be between 1 and 50 characters long.</div>
+            </div>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Content" id="floatingTextarea" name="content" style="height: 100px" aria-describedby="contentHelp"></textarea>
+                <label for="floatingTextarea">Content</label>
+                <div id="contentHelp" class="form-text">Content must be between 100 and 1000 characters long.</div>
+            </div>
+        
+            <div class="col-12 text-end mt-3">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+
+        </form>
+        <div class="mt-3" id="liveAlertPlaceholder"></div>
+        
+    </div>
+    <hr class="mt-4 mb-4 text-center">
+    <div class="container">
+    <h3 class="mb-3 fw-semibold text-start">Messages</h3>    
+    {% for parent in messages %}
+        {% set msg = parent %}
+        {% set is_child = false %}
+        {% include "components/message_card.html" %}
+    
+        {% for child in parent.children %}
+            {% set msg = child %}
+            {% set is_child = true %}
+            {% include "components/message_card.html" %}
+        {% endfor %}
+    {% endfor %}
+    </div>      
+</div>
+
+{% endblock %}
+
+
+{% block script_append %}
+
+
+<script src="/static/lib/APlayer-1.10.1/dist/APlayer.min.js"></script>
+<script src="/static/js/pages/home.js"></script>
+  
+{% endblock %}
+

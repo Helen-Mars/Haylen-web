@@ -1,0 +1,75 @@
+# ── Environment ────────────────────────────────────────────────────────────
+.env
+.env.local
+*.env.local
+*.env.*.local
+
+# ── Database ───────────────────────────────────────────────────────────────
+*.db
+*.sqlite
+*.sqlite3
+data/
+
+# ── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+venv/
+.venv/
+env/
+.ruff_cache/
+
+# ── Test ───────────────────────────────────────────────────────────────────
+.pytest_cache/
+tests/test.db
+
+# ── IDE / Editor ──────────────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Logs ───────────────────────────────────────────────────────────────────
+*.log
+_gsdata_/
+
+# ── Audio / Media ─────────────────────────────────────────────────────────
+audio/
+media/
+static/audio/
+
+# ── Content (large media files) ────────────────────────────────────────────
+content/storymap/
+content/timeline_file/
+
+# ── PDF / Content ─────────────────────────────────────────────────────────
+content/publication/pdf/
+content/publication/*.pdf
+
+# ── Frontend (Vue) ─────────────────────────────────────────────────────────
+frontend/vue_project/
+node_modules/
+
+# ── Static Libs (third-party) ──────────────────────────────────────────────
+static/lib/APlayer-1.10.1/
+static/lib/timeline3/
+static/lib/storymapjs/
+static/lib/lightbox2/
+
+# ── Favicon (root copy) ────────────────────────────────────────────────────
+/favicon.ico
+
+# ── Static Images (page content) ───────────────────────────────────────────
+static/images/photo_lightbox2/
+static/images/photo_lightbox2_thumb/
+static/images/sunset/

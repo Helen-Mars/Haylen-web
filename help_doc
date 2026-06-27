@@ -1,0 +1,162 @@
+echo "# Haylen-web" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Helen-Mars/Haylen-web.git
+git push -u origin main
+
+
+
+rm -r -force .git
+
+ruff check . --fix
+ruff check app tests --fix
+
+pytest tests/ -v
+
+6. 导航栏预留登录状态区域
+
+templates/components/navbar.html：
+
+<div id="auth-area">
+  <a href="/login">登录</a>
+  <a href="/register">注册</a>
+</div>
+
+然后在公共 base.html 底部引入一次：
+
+<script
+  src="{{ url_for('static', path='js/components/auth-state.js') }}"
+  defer
+></script>
+7. 创建全站登录状态脚本
+
+文件位置：
+
+static/js/components/auth-state.js
+
+代码：
+
+const authArea = document.getElementById("auth-area");
+
+function renderGuestState() {
+  authArea.replaceChildren();
+
+  const loginLink = document.createElement("a");
+  loginLink.href = "/login";
+  loginLink.textContent = "登录";
+
+  const separator = document.createTextNode(" / ");
+
+  const registerLink = document.createElement("a");
+  registerLink.href = "/register";
+  registerLink.textContent = "注册";
+
+  authArea.append(loginLink, separator, registerLink);
+}
+
+function renderUserState(user) {
+  authArea.replaceChildren();
+
+  const greeting = document.createElement("span");
+  greeting.textContent = `你好，${user.username}`;
+
+  const separator = document.createTextNode(" ");
+
+  const logoutButton = document.createElement("button");
+  logoutButton.type = "button";
+  logoutButton.textContent = "退出登录";
+
+  logoutButton.addEventListener("click", async () => {
+    await fetch("/api/v1/auth/logout", {
+      method: "POST",
+      credentials: "same-origin",
+    });
+
+    window.location.href = "/";
+  });
+
+  authArea.append(greeting, separator, logoutButton);
+}
+
+async function loadAuthState() {
+  if (!authArea) return;
+
+  try {
+    const response = await fetch("/api/v1/auth/me", {
+      credentials: "same-origin",
+    });
+
+    if (!response.ok) {
+      renderGuestState();
+      return;
+    }
+
+    const user = await response.json();
+    renderUserState(user);
+  } catch {
+    renderGuestState();
+  }
+}
+
+loadAuthState();
+
+这样所有继承 base.html 的页面都会自动显示正确状态。
+
+刷新页面时发生什么
+
+用户登录后刷新任意页面：
+
+浏览器自动带上 access_token Cookie
+    ↓
+页面加载 navbar
+    ↓
+auth-state.js 请求 /api/v1/auth/me
+    ↓
+后端验证 JWT、查询用户
+    ↓
+显示“你好，用户名 / 退出登录”
+
+Token 过期时：
+
+/me 返回 401
+    ↓
+导航栏恢复成“登录 / 注册”
+“记录登录”分为两种
+当前是否处于登录状态
+
+由 Cookie + JWT 负责：
+
+Cookie 存 Token
+Token 存 user_id、过期时间
+
+这已经足够支持登录、刷新、退出、权限接口。
+
+记录用户历史登录时间
+
+这是另一回事，需要数据库字段或日志表。
+
+简单做法是在 User 表增加：
+
+from datetime import datetime
+
+last_login_at: datetime | None = None
+
+登录成功时：
+
+from datetime import datetime, timezone
+
+user.last_login_at = datetime.now(timezone.utc)
+db.add(user)
+db.commit()
+
+以后需要查看每一次登录，再新建 UserLoginLog 表，记录：
+
+user_id
+logged_in_at
+ip_address
+user_agent
+logout_at
+
+你当前阶段先完成 Cookie、/me、导航栏状态、退出登录，就已经具备完整的登录状态体系了。

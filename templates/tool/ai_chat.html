@@ -1,0 +1,56 @@
+<!-- chat_widget.html -->
+<!-- 聊天组件 -->
+<div id="chat-container" class="position-fixed d-flex flex-column align-items-end btn-primary justify-content-center" style="bottom: 200px; right: 0px; z-index:1050; width: 320px;">
+    <button id="chat-toggle" class="btn d-flex align-items-center gap-2">
+        <svg class="bi text-info" width="36" height="36" fill="currentColor">
+            <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#chat-dots"></use>
+        </svg>
+    </button>
+
+    <div id="chat-box" class="card shadow d-none mt-2">
+        <div class="card-header bg-primary text-white">
+            AI Assistant
+        </div>
+        <div id="chat-messages" class="card-body overflow-auto" style="height:200px;">
+            <!-- 消息显示 -->
+        </div>
+        <input id="chat-input" class="form-control border-top" placeholder="Type a message..." />
+    </div>
+</div>
+
+<script>
+// 获取元素
+const toggleBtn = document.getElementById("chat-toggle");
+const chatBox = document.getElementById("chat-box");
+const input = document.getElementById("chat-input");
+const messages = document.getElementById("chat-messages");
+
+// 切换显示/隐藏
+toggleBtn.onclick = () => {
+    chatBox.classList.toggle('d-none');
+};
+
+// 添加消息
+function addMessage(sender, text) {
+    const msgEl = document.createElement('p');
+    msgEl.innerHTML = `<b class="text-primary">${sender}:</b> ${text}`;
+    messages.appendChild(msgEl);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+// 模拟 AI 回复（可替换成后端接口）
+async function sendMessage(text) {
+    addMessage("You", text);
+    setTimeout(() => {
+        addMessage("AI", "模拟回复：" + text.split("").reverse().join(""));
+    }, 500);
+}
+
+// 按回车发送
+input.addEventListener("keypress", function(e) {
+    if (e.key === "Enter" && input.value.trim() !== "") {
+        sendMessage(input.value.trim());
+        input.value = "";
+    }
+});
+</script>
