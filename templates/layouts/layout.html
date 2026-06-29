@@ -111,61 +111,129 @@
 
 
 <div class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" href="/">
-                <svg class="bi" height="30" width="30">
-                    <use href="/static/svgs/icons.svg#logo"/>
-                </svg>
-            </a>
-            <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2024 Fast Haylen, All rights.</span>
+    <footer class="row align-items-center gy-1 py-1 my-1 border-top">
 
+        <!-- 左侧：Logo / 版权 / 备案 -->
+        <div class="col-12 col-lg-5">
+            <div class="d-flex flex-column flex-sm-row align-items-center align-items-lg-start gap-3">
+                <a
+                    href="/"
+                    class="border rounded-3 p-2 text-body-secondary text-decoration-none d-inline-flex align-items-center justify-content-center"
+                    aria-label="首页"
+                >
+                    <svg class="bi" width="26" height="26">
+                        <use href="/static/svgs/icons.svg#logo"></use>
+                    </svg>
+                </a>
+
+                <div class="text-center text-sm-start">
+                    <div class="small text-body-secondary">
+                        © 2024 Fast Haylen. All rights reserved.
+                    </div>
+
+                    <a
+                        class="mt-2 d-inline-flex align-items-center text-body-secondary text-decoration-none small"
+                        href="https://beian.miit.gov.cn/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <img
+                            src="/static/images/beian-icon.png"
+                            width="16"
+                            height="16"
+                            class="me-1"
+                            alt=""
+                        />
+                        陇ICP备2025018757号-1
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="col-12 col-md-auto justify-content-start mb-3 mb-md-0">
-            <span id="view-count" class="text-body-secondary ms-2"></span>
+        <!-- 中间：访问量 -->
+        <div class="col-12 col-lg-2 text-center">
+            <div class="d-inline-flex flex-column px-3 border-start border-end">
+                <span class="small text-body-secondary">Total Visits</span>
+                <span id="view-count" class="fw-semibold text-body"></span>
+            </div>
         </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.youtube.com/@haylenma">
-                    <svg class="bi" width="24" height="24" >
-                        <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#youtube"></use>
-                    </svg>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.tiktok.com/@helen.mars8?_t=ZS-8vlG3PZyK3O&_r=1">
-                    <svg class="bi" width="24" height="24" >
-                        <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#tiktok"></use>
-                    </svg>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-body-secondary" href="https://x.com/helen_mars250?s=09">
-                    <svg class="bi" width="24" height="24" >
-                        <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#twitter-x"></use>
-                    </svg>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.instagram.com/haylenma/">
-                    <svg class="bi" height="24" width="24">
-                        <use href="/static/svgs/icons.svg#instagram"/>
-                    </svg>
-                </a>
-            </li>
-            <li class="ms-3">
-                <a class="text-body-secondary" href="https://www.facebook.com/share/1z1omaL9jmS9aUPQ/?mibextid=qi2Omg">
-                    <svg class="bi" height="24" width="24">
-                        <use href="/static/svgs/icons.svg#facebook"/>
-                    </svg>
-                </a>
-            </li>
-        </ul>
+        <!-- 右侧：社媒 -->
+        <div class="col-12 col-lg-5">
+            <ul class="nav justify-content-center justify-content-lg-end gap-2 mb-0">
+                <li class="nav-item">
+                    <a
+                        class="btn btn-outline-secondary btn-sm rounded-circle p-2 d-inline-flex"
+                        href="https://www.youtube.com/@haylenma"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="YouTube"
+                    >
+                        <svg class="bi" width="18" height="18">
+                            <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#youtube"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="btn btn-outline-secondary btn-sm rounded-circle p-2 d-inline-flex"
+                        href="https://www.tiktok.com/@helen.mars8?_t=ZS-8vlG3PZyK3O&_r=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="TikTok"
+                    >
+                        <svg class="bi" width="18" height="18">
+                            <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#tiktok"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="btn btn-outline-secondary btn-sm rounded-circle p-2 d-inline-flex"
+                        href="https://x.com/helen_mars250?s=09"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="X"
+                    >
+                        <svg class="bi" width="18" height="18">
+                            <use href="/static/lib/bootstrap/icon/bootstrap-icons.svg#twitter-x"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="btn btn-outline-secondary btn-sm rounded-circle p-2 d-inline-flex"
+                        href="https://www.instagram.com/haylenma/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <svg class="bi" width="18" height="18">
+                            <use href="/static/svgs/icons.svg#instagram"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a
+                        class="btn btn-outline-secondary btn-sm rounded-circle p-2 d-inline-flex"
+                        href="https://www.facebook.com/share/1z1omaL9jmS9aUPQ/?mibextid=qi2Omg"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                    >
+                        <svg class="bi" width="18" height="18">
+                            <use href="/static/svgs/icons.svg#facebook"></use>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
         {% block footer_append %}
-
         {% endblock %}
     </footer>
 </div>
