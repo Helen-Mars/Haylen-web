@@ -7,7 +7,7 @@ from app.web.template_engine import templates
 from app.utils.content_loader import PROJECT_DIR
 
 router = APIRouter()
-@router.get("/work", response_class=HTMLResponse)
+@router.get("/achievements", response_class=HTMLResponse)
 async def get_achievement(request: Request):
     publication_path = PROJECT_DIR / "content" / "publication" / "publication.json"
 
@@ -16,8 +16,8 @@ async def get_achievement(request: Request):
         publications = json.load(f)
 
     for publication in publications:
-        publication["pdflink"] = f"/content/publication/pdf/{publication['pdflink']}"
+        publication["pdflink"] = publication['pdflink']
 
     # 将修改后的 publications 传递到模板
-    return templates.TemplateResponse("pages/work.html", {"request": request, "publications": publications})
+    return templates.TemplateResponse("pages/achievements.html", {"request": request, "publications": publications})
 

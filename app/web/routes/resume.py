@@ -5,6 +5,6 @@ from app.web.template_engine import templates
 
 router = APIRouter()
 
-@router.get("/learning", response_class=HTMLResponse)
+@router.get("/resume", response_class=HTMLResponse)
 async def about(request: Request):
-    return templates.TemplateResponse("pages/learning.html", {"request": request})
+    return templates.TemplateResponse("pages/resume.html", {"request": request})

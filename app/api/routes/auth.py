@@ -82,6 +82,16 @@ async def login(user: UserLogin, response: Response, db: SessionDep):
 
 @router.post("/register", response_model=UserRead)
 async def register_user(user: UserCreate, session: SessionDep):
+    # 检查用户名是否已存在
+    existing_user = session.exec(select(User).where(User.username == user.username)).first()
+    if existing_user:
+        raise HTTPException(status_code=409, detail="Username already exists")
+
+    # 检查邮箱是否已存在
+    existing_email = session.exec(select(User).where(User.email == user.email)).first()
+    if existing_email:
+        raise HTTPException(status_code=409, detail="Email already exists")
+
     user_dict = user.model_dump()
     user_dict["hashed_password"] = hash_password(user.password)
     db_user = User.model_validate(user_dict)

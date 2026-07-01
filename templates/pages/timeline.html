@@ -65,7 +65,7 @@
 
 <script>
   // storymap_data can be an URL or a Javascript object
-  var storymap_data = '/content/storymap/mystorymap.json';
+  var storymap_data = {{ storymap_json | tojson }};
 
   // certain settings must be passed within a separate options object
   var storymap_options = {calculate_zoom: true};

@@ -19,15 +19,15 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
 app = FastAPI(lifespan=lifespan, debug=settings.debug)
 
 # ── Global State ──────────────────────────────────────────────────────────
-app.state.global_variables = {
-    "svg_path": "/static/svgs/icons.svg",
-}
+# app.state.global_variables = {
+#     "svg_path": "/static/svgs/icons.svg",
+# }
 
 # ── Static Files ──────────────────────────────────────────────────────────
 app.mount("/static", StaticFiles(directory="static"), name="static")
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 app.mount("/content", StaticFiles(directory="content"), name="content")
-app.mount("/shop", StaticFiles(directory="frontend/vue_project/dist", html=True), name="shop")
+# app.mount("/shop", StaticFiles(directory="frontend/vue_project/dist", html=True), name="shop")
 # ── API Routes ────────────────────────────────────────────────────────────
 app.include_router(api_router)
 

@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     # AI 配置
     openai_api_key: str | None = None
 
+    # Cloudflare Images 配置
+    cloudflare_images_domain: str = "https://haylen.com"
+
     model_config = SettingsConfigDict(
         env_file=PROJECT_DIR / ".env",
         env_file_encoding="utf-8",
